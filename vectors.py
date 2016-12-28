@@ -13,15 +13,26 @@ class Vector(object):
             raise TypeError('The coordinates must be an iterable')
 
 
+
+
+    def sum(self, v):
+        new_coordinates = [x+y for x, y in zip(self.coordinates, v.coordinates)]
+        return Vector(new_coordinates)
+
+    def difference(self, v):
+        new_coordinates = [x-y for x, y in zip(self.coordinates, v.coordinates)]
+        return Vector(new_coordinates)
+
+    def scalarproduct(self, c):
+        new_coordinates = [x*c for x in self.coordinates]
+        return Vector(new_coordinates)
+
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
 
 
     def __eq__(self, v):
         return self.coordinates == v.coordinates
-
-    def sum(self, v):
-        return [self.coordinates[i] + v.coordinates[i] for i in range(len(self))]
 
 my_vector = Vector([1, 2, 3])
 print my_vector
