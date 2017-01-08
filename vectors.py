@@ -81,8 +81,53 @@ class Vector(object):
                 raise e
 
 
+    # vectors are parallel if one vector is a scalar multiple of the other. They can be parallel even if pointing in opposite directions 
+    # vectors are perpendicular (orthogonal) if their dot product = 0. One is 0 vector, or they are perpendicular 
+
+    def is_orthogonal(self, v, tolerance = 1e - 10): #tolerance is small value. Use this as a check instead of zero, if abs(dot) < tolerance 
+        return abs(self.dot(v)) < tolerance
+
+    def is_parallel_to(self, v): 
+        return ( self.is_zero() or 
+            v.is_zero() or 
+            self.angle_with(v) == 0 or #same direction
+            self.angle_with(v) == pi)  #opposite direction 
+            # these are all the conditionals for parallel vectors, booleans 
+
+    def is_zero(self, v, tolerance = 1e - 10): 
+        return self.magnitude() < tolerance 
+
+    def component_orthoganol_to(self, basis): 
+        try: 
+            projection = self.component_parallel_to(basis)
+            return self.difference(projection)
+
+        except Exception as e: 
+            if str(e) == NO_UNIQUE_PARALLEL_COMPONENT_MSG: 
+                raise Exception(self.NO_UNIQUE_PARALLEL_COMPONENT_MSG)
+            else: 
+                raise e
 
 
+
+
+    def component_parallel_to(self, basis): 
+        try: 
+            basis.normalize() #make unit vector
+            weight = self.dot(u) #make dot product of u with vector being projected 
+            return u.scalar_product(weight)
+
+        except Exception as e: 
+            if str(e) == self.CANNOT_NORMALIZE_ZERO_VECTOR_MSG: 
+                raise Exception(self.NO_UNIQUE_PARALLEL_COMPONENT_MSG)
+            else: 
+                raise e 
+
+    def is_orthoganol_to(self, v, tolerance= 1e - 10): 
+        return abs(self.dot(v)) < tolerance 
+
+
+    #cross product 
 
 
 my_vector = Vector([1, 2, 3])
