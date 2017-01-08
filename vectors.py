@@ -1,3 +1,5 @@
+#Library of common linear algebra vector operations. Used as exercise file for Udacity Linear Algebra Refresher Course 
+
 class Vector(object):
     def __init__(self, coordinates):
         try:
@@ -13,20 +15,6 @@ class Vector(object):
             raise TypeError('The coordinates must be an iterable')
 
 
-
-
-    def sum(self, v):
-        new_coordinates = [x+y for x, y in zip(self.coordinates, v.coordinates)]
-        return Vector(new_coordinates)
-
-    def difference(self, v):
-        new_coordinates = [x-y for x, y in zip(self.coordinates, v.coordinates)]
-        return Vector(new_coordinates)
-
-    def scalarproduct(self, c):
-        new_coordinates = [x*c for x in self.coordinates]
-        return Vector(new_coordinates)
-
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
 
@@ -34,10 +22,30 @@ class Vector(object):
     def __eq__(self, v):
         return self.coordinates == v.coordinates
 
+    def sum(self, v):
+        #return Vector([self.coordinates[i] + v.coordinates[i] for i in range(len(self))])
+        return Vector([x+y for x, y in zip(self.coordinates, v.coordinates)])
+        #zip combines two iterables for operations 
+
+    def difference(self, v):
+        #return Vector([self.coordinates[i] - v.coordinates[i] for i in range(len(self))])
+        return Vector([x-y for x, y in zip(self.coordinates, v.coordinates)])
+
+    def scalar_product(self, c): #each number in vector x c
+        return Vector([c*x for x in self.coordinates])
+
+
+# unit vector: vector with magnitude = 1, represents vector direction 
+# Normalization: find unit vector in same direction as given vector. Scalar multiplication of vector with 1/magnitude(v) 
+
+
+
 my_vector = Vector([1, 2, 3])
 print my_vector
 my_vector2 = Vector([1, 2, 3])
 my_vector3 = Vector([-1, 2, 3])
 
 print my_vector3 == my_vector2
-print sum(my_vector, my_vector2)
+a = Vector([8.218, -9.341])
+b = Vector([-1.129, 2.111])
+print a.sum(b)
