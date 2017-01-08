@@ -1,12 +1,17 @@
 #Library of common linear algebra vector operations. Used as exercise file for Udacity Linear Algebra Refresher Course 
 
-from math import sqrt 
+from math import acos, pi, sqrt 
+from decimal import Decimal, getcontext 
+getcontext().prec = 30 
+
 class Vector(object):
+    CANNOT_NORMALIZE_ZERO_VECTOR_MSG = 'Cannot normalize the zero vector'
+
     def __init__(self, coordinates):
         try:
             if not coordinates:
                 raise ValueError
-            self.coordinates = tuple(coordinates)
+            self.coordinates = tuple([Decimal(x) for x in coordinates]) #coordinates are decimals objects 
             self.dimension = len(coordinates)
 
         except ValueError:
@@ -33,7 +38,7 @@ class Vector(object):
         return Vector([x-y for x, y in zip(self.coordinates, v.coordinates)])
 
     def scalar_product(self, c): #each number in vector x c
-        return Vector([c*x for x in self.coordinates])
+        return Vector([Decimal(c)*x for x in self.coordinates])
 
 
     # unit vector: vector with magnitude = 1, represents vector direction 
@@ -47,10 +52,36 @@ class Vector(object):
     def normalize(self): 
         try: 
             magnitude = self.magnitude()
-            return self.scalar_product(1.0/magnitude)
+            return self.scalar_product(Decimal('1.0')/magnitude)
         except: 
             # if exception occurs in try statement, this runs 
-            raise Exception('Cannot normalize a zero vector!')
+            raise Exception('Cannot normalize a zero vector')
+
+    #used to find angle between two vectors. Results in an NUMBER, not a vector 
+    def dotproduct(self, v): 
+        return sum([x*y for x, y in zip(self.coordinates, v.coordinates)])
+
+    def angle_with(self, v, in_degrees = False): #if in_degrees = True, will output angle in degrees, False- radians 
+        try: 
+            u1 = self.normalize()
+            u2 = v.normalize()
+            angle_radians = acos(u1.dotproduct(u2))
+
+            if in_degrees: # in_degrees == True
+                degrees_per_radian = 180.0/pi 
+                return angle_radians * degrees_per_radian
+
+            else:
+                return angle_radians
+
+        except Exception as e: 
+            if str(e) == self.CANNOT_NORMALIZE_ZERO_VECTOR_MSG: 
+                raise Exception('Cannot compute an angle with the zero vector')
+            else: 
+                raise e
+
+
+
 
 
 
@@ -64,6 +95,3 @@ a = Vector([8.218, -9.341])
 b = Vector([-1.129, 2.111])
 print a.sum(b)
 
-v = Vector([1, 2])
-print v.magnitude()
-print v.normalize()
