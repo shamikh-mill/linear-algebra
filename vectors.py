@@ -1,4 +1,5 @@
 #Library of common linear algebra vector operations. Used as exercise file for Udacity Linear Algebra Refresher Course 
+#Updated 
 
 from math import acos, pi, sqrt 
 from decimal import Decimal, getcontext 
