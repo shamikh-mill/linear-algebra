@@ -15,6 +15,7 @@ class Vector(object):
             self.coordinates = tuple([Decimal(x) for x in coordinates]) #coordinates are decimals objects 
             self.dimension = len(coordinates)
 
+
         except ValueError:
             raise ValueError('The coordinates must be nonempty')
 
