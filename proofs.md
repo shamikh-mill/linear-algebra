@@ -19,13 +19,13 @@
 4. Irrational Numbers- cannot be written in the form a/b in which a and b are nonzero integers with no common factors. 
 
 - (∀x ∈ S) P(x)
-This means that P(x) is true for every x in the set S
-
-R = the set of real numbers,
-Q = the set of rational numbers,
-Z = the set of integers,
-N = the set of natural numbers (nonnegative integers),
-Z+ = the set of positive integers
+This means that P(x) is true for every x in the set S  
+  
+R = the set of real numbers,  
+Q = the set of rational numbers,  
+Z = the set of integers,  
+N = the set of natural numbers (nonnegative integers),  
+Z+ = the set of positive integers  
 
 ## References 
 1. https://math.berkeley.edu/~hutching/teach/proofs.pdf
