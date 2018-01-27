@@ -13,7 +13,7 @@
 ## Useful Definitions used in Proofs 
 1. Even - An integer x is even if there exists an integer y such that x = 2y.
 2. Odd- An integer x is odd if there exists an integer y such that x = 2y + 1.
-3. Rational Numbers- set Q, can be written in form a/b in which a and b are nonzero integers with no common factors. 
+3. Rational Numbers- set Q, can be written in form a/b in which b is nonzero and a and b have no common factors. 
 - The difference of rational numbers is rational. 
 - Let x ∈ Q. Then ∃a,b ∈ Z such that x = a/b. 
 4. Irrational Numbers- cannot be written in the form a/b in which a and b are nonzero integers with no common factors. 
